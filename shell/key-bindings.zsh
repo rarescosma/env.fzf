@@ -10,6 +10,9 @@ __fsel() {
     -o -type l -print 2> /dev/null | cut -b3-"}"
   setopt localoptions pipefail 2> /dev/null
   eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__fzfcmd) -m "$@" | while read item; do
+    if [[ "${(q)item}" == "enter" ]]; then
+      continue
+    fi
     echo -n "${(q)item} "
   done
   local ret=$?
