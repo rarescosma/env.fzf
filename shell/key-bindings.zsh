@@ -13,6 +13,9 @@ __fsel() {
     if [[ "${(q)item}" == "enter" ]]; then
       continue
     fi
+    if [[ "${(q)item}" == "''" ]]; then
+      continue
+    fi
     echo -n "${(q)item} "
   done
   local ret=$?
